@@ -21,6 +21,8 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+#include "compat.h"
+
 #define MAX_LINE	4096
 #define TMPBUF_LEN	131072
 

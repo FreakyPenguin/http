@@ -87,7 +87,7 @@ ftp_get(struct url *url)
 	if (ftp_command(ctrl_sock, "TYPE I") != P_OK)
 		errx(1, "Failed to set mode to binary");
 
-	dir = dirname(url->path);
+        dir = dirname_c(url->path);
 	if (ftp_command(ctrl_sock, "CWD %s", dir) != P_OK)
 		errx(1, "CWD command failed");
 
@@ -244,14 +244,16 @@ ftp_pasv(int fd)
 
 	memset(&sa, 0, sizeof sa);
 	sa.sin_family = AF_INET;
+#ifndef __linux__
 	sa.sin_len = sizeof(sa);
+#endif
 	sa.sin_addr.s_addr = htonl(pack4(addr, 0));
 	sa.sin_port = htons(pack2(port, 0));
 
 	if ((sock = socket(sa.sin_family, SOCK_STREAM, 0)) == -1)
 		err(1, "ftp_pasv: socket");
 
-	if (connect(sock, (struct sockaddr *)&sa, sa.sin_len) == -1)
+	if (connect(sock, (struct sockaddr *)&sa, sizeof(sa)) == -1)
 		err(1, "ftp_pasv: connect");
 
 	return sock;

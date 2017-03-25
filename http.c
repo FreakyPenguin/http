@@ -215,8 +215,12 @@ https_init(void)
 			tls_config_insecure_noverifytime(tls_config);
 			break;
 		default:
+#ifdef __linux__
+			errx(1, "Unknown -S suboption `%s'", tls_options);
+#else
 			errx(1, "Unknown -S suboption `%s'",
 			    suboptarg ? suboptarg : "");
+#endif
 		}
 	}
 

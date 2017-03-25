@@ -267,7 +267,7 @@ child(int sock, int argc, char **argv)
 		memset(&url, 0, sizeof url);
 		url_parse(&url, str);
 		free(str);
-		if ((url.fname = oarg ? oarg : basename(url.path)) == NULL)
+		if ((url.fname = oarg ? oarg : basename_c(url.path)) == NULL)
 			err(1, "basename(%s)", url.path);
 
 		if (strcmp(url.fname, "/") == 0)
@@ -353,7 +353,7 @@ url_save(struct url *url, int fd)
 	}
 
 	fname = strcmp(url->fname, "-") == 0 ?
-	    basename(url->path) : basename(url->fname);
+	    basename_c(url->path) : basename_c(url->fname);
 
 	start_progress_meter(fname, url->file_sz, &url->offset);
 	switch (url->scheme) {
