@@ -21,3 +21,7 @@ char *basename_const(const char *p);
 #define basename_c basename
 #define dirname_c dirname
 #endif
+
+#ifdef __linux__
+#define DEFAULT_CA_FILE "/etc/ssl/certs/ca-certificates.crt"
+#endif
