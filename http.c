@@ -27,7 +27,9 @@
 
 #include "http.h"
 
-#define	DEFAULT_CA_FILE	"/etc/ssl/cert.pem"
+#ifndef DEFAULT_CA_FILE
+#   define	DEFAULT_CA_FILE	"/etc/ssl/cert.pem"
+#endif
 #define MAX_REDIRECTS	10
 
 /*
