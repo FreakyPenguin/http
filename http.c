@@ -464,7 +464,6 @@ static void
 headers_parse(struct http_headers *headers, const char *buf)
 {
 	const char	*errstr;
-	size_t		 sz;
 
 	if (strncasecmp(buf, "Content-Length: ", 16) == 0) {
 		if ((buf = strchr(buf, ' ')) == NULL)

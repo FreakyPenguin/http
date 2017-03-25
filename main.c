@@ -199,7 +199,7 @@ parent(int sock, pid_t child_pid, int argc, char **argv)
 	const char	*fn;
 	size_t		 datalen;
 	off_t		 offset;
-	int		 fd, flags, sig, status;
+	int		 fd, sig, status;
 
 	if (pledge("stdio cpath rpath wpath sendfd", NULL) == -1)
 		err(1, "pledge");
@@ -250,7 +250,6 @@ child(int sock, int argc, char **argv)
 {
 	struct url	 url;
 	char		*str;
-	off_t		*poff;
 	int		 fd, flags, i;
 
 	https_init();
